@@ -48,15 +48,15 @@ namespace WindowsFormsApp1
         private void LoadData()
         {
             var query = from sv in db.SinhViens
-                        join lh in db.LopHocs on sv.Lop equals lh.MaLop
+                        join lh in db.LopHocs on sv.MaLop equals lh.MaLop
                         select new
                         {
                             sv.MaSV,
-                            sv.TenSV,
+                            sv.HoTen,
                             sv.GioiTinh,
                             sv.NgaySinh,
                             lh.TenLop,
-                            sv.Lop
+                            sv.MaLop
                         };
 
             dgv_DSSV.DataSource = query.ToList();
@@ -116,9 +116,9 @@ namespace WindowsFormsApp1
             {
                 SinhVien svNew = new SinhVien();
                 svNew.MaSV = txb_masv.Text;
-                svNew.TenSV = txb_hoten.Text;
+                svNew.HoTen = txb_hoten.Text;
                 svNew.GioiTinh = cmb_gioitinh.Text;
-                svNew.Lop = cmb_Lop.SelectedValue.ToString();
+                svNew.MaLop = cmb_Lop.SelectedValue.ToString();
 
                 if (dt_ngaysinh.CustomFormat != " ")
                     svNew.NgaySinh = dt_ngaysinh.Value.Date;
@@ -146,9 +146,9 @@ namespace WindowsFormsApp1
 
                 if (svEdit != null)
                 {
-                    svEdit.TenSV = txb_hoten.Text;
+                    svEdit.HoTen = txb_hoten.Text;
                     svEdit.GioiTinh = cmb_gioitinh.Text;
-                    svEdit.Lop = cmb_Lop.SelectedValue.ToString();
+                    svEdit.MaLop = cmb_Lop.SelectedValue.ToString();
 
                     if (dt_ngaysinh.CustomFormat != " ")
                         svEdit.NgaySinh = dt_ngaysinh.Value.Date;
@@ -197,16 +197,16 @@ namespace WindowsFormsApp1
             string keyword = txb_SearchSV.Text.Trim();
 
             var query = from sv in db.SinhViens
-                        join lh in db.LopHocs on sv.Lop equals lh.MaLop
-                        where sv.TenSV.Contains(keyword) || sv.MaSV.Contains(keyword)
+                        join lh in db.LopHocs on sv.MaLop equals lh.MaLop
+                        where sv.HoTen.Contains(keyword) || sv.MaSV.Contains(keyword)
                         select new
                         {
                             sv.MaSV,
-                            sv.TenSV,
+                            sv.HoTen,
                             sv.GioiTinh,
                             sv.NgaySinh,
                             lh.TenLop,
-                            sv.Lop
+                            sv.MaLop
                         };
 
             dgv_DSSV.DataSource = query.ToList();

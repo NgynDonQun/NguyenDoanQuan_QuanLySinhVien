@@ -44,5 +44,16 @@ namespace WindowsFormsApp1.Properties {
                 return ((string)(this["QuanLySinhVienDBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Sow;Initial Catalog=QLSV_DB;Persist Security Info=True;User ID=sa;Pas" +
+            "sword=123456;TrustServerCertificate=True")]
+        public string QLSV_DBConnectionString {
+            get {
+                return ((string)(this["QLSV_DBConnectionString"]));
+            }
+        }
     }
 }
