@@ -5,7 +5,7 @@
       <Column Name="MaLop" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TenLop" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="SiSo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="LopHoc_SinhVien" Member="SinhViens" ThisKey="MaLop" OtherKey="MaLop" Type="SinhVien" />
+      <Association Name="LopHoc_SinhVien" Member="SinhViens" ThisKey="MaLop" OtherKey="Lop" Type="SinhVien" />
     </Type>
   </Table>
   <Table Name="dbo.TaiKhoan" Member="TaiKhoans">
@@ -20,9 +20,10 @@
     <Type Name="SinhVien">
       <Column Name="MaSV" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TenSV" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="MaLop" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="LopHoc_SinhVien" Member="LopHoc" ThisKey="MaLop" OtherKey="MaLop" Type="LopHoc" IsForeignKey="true" />
+      <Column Name="Lop" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="LopHoc_SinhVien" Member="LopHoc" ThisKey="Lop" OtherKey="MaLop" Type="LopHoc" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

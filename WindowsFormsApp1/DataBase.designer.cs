@@ -188,7 +188,7 @@ namespace WindowsFormsApp1
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LopHoc_SinhVien", Storage="_SinhViens", ThisKey="MaLop", OtherKey="MaLop")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LopHoc_SinhVien", Storage="_SinhViens", ThisKey="MaLop", OtherKey="Lop")]
 		public EntitySet<SinhVien> SinhViens
 		{
 			get
@@ -378,9 +378,11 @@ namespace WindowsFormsApp1
 		
 		private string _TenSV;
 		
+		private string _GioiTinh;
+		
 		private System.Nullable<System.DateTime> _NgaySinh;
 		
-		private string _MaLop;
+		private string _Lop;
 		
 		private EntityRef<LopHoc> _LopHoc;
 		
@@ -392,10 +394,12 @@ namespace WindowsFormsApp1
     partial void OnMaSVChanged();
     partial void OnTenSVChanging(string value);
     partial void OnTenSVChanged();
+    partial void OnGioiTinhChanging(string value);
+    partial void OnGioiTinhChanged();
     partial void OnNgaySinhChanging(System.Nullable<System.DateTime> value);
     partial void OnNgaySinhChanged();
-    partial void OnMaLopChanging(string value);
-    partial void OnMaLopChanged();
+    partial void OnLopChanging(string value);
+    partial void OnLopChanged();
     #endregion
 		
 		public SinhVien()
@@ -444,6 +448,26 @@ namespace WindowsFormsApp1
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GioiTinh", DbType="NVarChar(10)")]
+		public string GioiTinh
+		{
+			get
+			{
+				return this._GioiTinh;
+			}
+			set
+			{
+				if ((this._GioiTinh != value))
+				{
+					this.OnGioiTinhChanging(value);
+					this.SendPropertyChanging();
+					this._GioiTinh = value;
+					this.SendPropertyChanged("GioiTinh");
+					this.OnGioiTinhChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgaySinh", DbType="Date")]
 		public System.Nullable<System.DateTime> NgaySinh
 		{
@@ -464,31 +488,31 @@ namespace WindowsFormsApp1
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLop", DbType="VarChar(20)")]
-		public string MaLop
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lop", DbType="VarChar(20)")]
+		public string Lop
 		{
 			get
 			{
-				return this._MaLop;
+				return this._Lop;
 			}
 			set
 			{
-				if ((this._MaLop != value))
+				if ((this._Lop != value))
 				{
 					if (this._LopHoc.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaLopChanging(value);
+					this.OnLopChanging(value);
 					this.SendPropertyChanging();
-					this._MaLop = value;
-					this.SendPropertyChanged("MaLop");
-					this.OnMaLopChanged();
+					this._Lop = value;
+					this.SendPropertyChanged("Lop");
+					this.OnLopChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LopHoc_SinhVien", Storage="_LopHoc", ThisKey="MaLop", OtherKey="MaLop", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LopHoc_SinhVien", Storage="_LopHoc", ThisKey="Lop", OtherKey="MaLop", IsForeignKey=true)]
 		public LopHoc LopHoc
 		{
 			get
@@ -511,11 +535,11 @@ namespace WindowsFormsApp1
 					if ((value != null))
 					{
 						value.SinhViens.Add(this);
-						this._MaLop = value.MaLop;
+						this._Lop = value.MaLop;
 					}
 					else
 					{
-						this._MaLop = default(string);
+						this._Lop = default(string);
 					}
 					this.SendPropertyChanged("LopHoc");
 				}
